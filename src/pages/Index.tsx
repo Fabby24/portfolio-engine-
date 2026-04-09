@@ -12,12 +12,13 @@ import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
 import ChatBot from "@/components/ChatBot";
+import ParallaxSection from "@/components/ParallaxSection";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 2200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,13 +37,13 @@ const Index = () => {
         >
           <Navbar />
           <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <GitHubSection />
-          <Thinking />
-          <Certifications />
-          <Contact />
+          <ParallaxSection><About /></ParallaxSection>
+          <ParallaxSection offset={30}><Skills /></ParallaxSection>
+          <ParallaxSection><Projects /></ParallaxSection>
+          <ParallaxSection offset={30}><GitHubSection /></ParallaxSection>
+          <ParallaxSection><Thinking /></ParallaxSection>
+          <ParallaxSection offset={30}><Certifications /></ParallaxSection>
+          <ParallaxSection><Contact /></ParallaxSection>
           <Footer />
           <ChatBot />
         </motion.div>

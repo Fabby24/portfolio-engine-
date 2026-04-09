@@ -3,9 +3,9 @@ import { motion, useInView } from "framer-motion";
 import { Award, ExternalLink } from "lucide-react";
 
 const certs = [
-  { title: "Full-Stack Web Development", issuer: "PLP Academy", year: "2024", desc: "Comprehensive program covering React, Node.js, databases, and deployment." },
-  { title: "Python for Data Science", issuer: "Coursera", year: "2023", desc: "Data analysis, visualization, and machine learning fundamentals." },
-  { title: "JavaScript Algorithms & Data Structures", issuer: "freeCodeCamp", year: "2023", desc: "300+ hours of algorithmic problem-solving and data structure mastery." },
+  { title: "Full-Stack Web Development", issuer: "PLP Academy", year: "2024", desc: "Comprehensive program covering React, Node.js, databases, and deployment.", link: "https://plpacademy.powerlearnproject.org" },
+  { title: "Python for Data Science", issuer: "Coursera", year: "2023", desc: "Data analysis, visualization, and machine learning fundamentals.", link: "https://coursera.org/verify/example" },
+  { title: "JavaScript Algorithms & Data Structures", issuer: "freeCodeCamp", year: "2023", desc: "300+ hours of algorithmic problem-solving and data structure mastery.", link: "https://freecodecamp.org/certification/fabianmusau/javascript-algorithms-and-data-structures" },
 ];
 
 export default function Certifications() {
@@ -32,13 +32,21 @@ export default function Certifications() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="card-elevated p-6 group hover:border-primary/30 transition-all duration-300 relative overflow-hidden"
+              className="card-elevated p-6 group hover:border-primary/30 transition-all duration-300 relative overflow-hidden flex flex-col"
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full" />
               <Award className="text-primary mb-4" size={32} />
               <h3 className="font-display font-bold text-foreground text-lg">{cert.title}</h3>
               <p className="text-sm text-primary font-medium mt-1">{cert.issuer} · {cert.year}</p>
-              <p className="text-sm text-muted-foreground mt-3">{cert.desc}</p>
+              <p className="text-sm text-muted-foreground mt-3 flex-1">{cert.desc}</p>
+              <a
+                href={cert.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent transition-colors"
+              >
+                View Certificate <ExternalLink size={14} />
+              </a>
             </motion.div>
           ))}
         </div>

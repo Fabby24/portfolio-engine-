@@ -1,10 +1,14 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, ChevronDown, ChevronUp, Zap } from "lucide-react";
+import { ExternalLink, Github, ChevronDown, ChevronUp, Zap, Play } from "lucide-react";
+import projectEdubursary from "@/assets/project-edubursary.jpg";
+import projectBilling from "@/assets/project-billing.jpg";
+import projectSms from "@/assets/project-sms.jpg";
 
 type Project = {
   title: string;
   status: "Active" | "Completed" | "Maintained";
+  screenshot: string;
   problem: string;
   goal: string;
   approach: string;
@@ -20,6 +24,7 @@ const projects: Project[] = [
   {
     title: "EduBursary System",
     status: "Active",
+    screenshot: projectEdubursary,
     problem: "Students in Kenya struggle to access and apply for bursary funding due to fragmented, paper-based processes.",
     goal: "Create a digital platform that streamlines bursary applications, reviews, and fund disbursement.",
     approach: "Built a full-stack web app with role-based access for students, reviewers, and administrators.",
@@ -27,10 +32,13 @@ const projects: Project[] = [
     challenges: "Handling concurrent applications, document uploads, and ensuring data integrity across multiple reviewers.",
     solution: "Implemented queue-based processing, optimistic UI updates, and transactional database operations.",
     impact: "Reduced application processing time by 70%, serving 500+ students in the pilot phase.",
+    github: "https://github.com/fabianmusau",
+    live: "https://edubursary.example.com",
   },
   {
     title: "Dynamic Billing & Space Reservation",
     status: "Completed",
+    screenshot: projectBilling,
     problem: "Businesses managing shared spaces lacked a unified system for billing and reservations.",
     goal: "Build a dynamic billing engine with real-time space availability and booking management.",
     approach: "Designed a modular architecture with a pricing engine, calendar system, and payment integration.",
@@ -38,10 +46,12 @@ const projects: Project[] = [
     challenges: "Complex pricing rules, timezone handling, and race conditions in concurrent bookings.",
     solution: "Implemented a rule-based pricing engine with optimistic locking for reservation conflicts.",
     impact: "Automated billing for 3 business locations, eliminating manual invoicing errors.",
+    github: "https://github.com/fabianmusau",
   },
   {
     title: "Bulk SMS Web App",
     status: "Maintained",
+    screenshot: projectSms,
     problem: "Organizations needed to send mass SMS notifications but lacked an affordable, user-friendly tool.",
     goal: "Create a web-based platform for composing, scheduling, and tracking bulk SMS campaigns.",
     approach: "Integrated with Africa's Talking SMS API, built a contact management system and analytics dashboard.",
@@ -49,6 +59,8 @@ const projects: Project[] = [
     challenges: "Rate limiting, delivery tracking, and handling large contact lists efficiently.",
     solution: "Batch processing with retry logic, webhook-based delivery receipts, and paginated contact imports.",
     impact: "Enabled 10,000+ messages/month for local organizations with 98% delivery rate.",
+    github: "https://github.com/fabianmusau",
+    live: "https://bulksms.example.com",
   },
 ];
 
@@ -71,20 +83,27 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ duration: 0.5, delay: index * 0.15 }}
       className="card-elevated overflow-hidden group"
     >
+      {/* Screenshot */}
+      <div className="relative overflow-hidden h-48">
+        <img
+          src={project.screenshot}
+          alt={`${project.title} screenshot`}
+          loading="lazy"
+          width={1280}
+          height={720}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
+        <span className={`absolute top-3 right-3 text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm ${statusColors[project.status]}`}>
+          <Zap size={10} className="inline mr-1" />
+          {project.status}
+        </span>
+      </div>
+
       {/* Header */}
       <div className="p-6 pb-4">
-        <div className="flex items-start justify-between mb-3">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <h3 className="font-display text-xl font-bold text-foreground">{project.title}</h3>
-              <span className={`text-xs font-medium px-3 py-1 rounded-full ${statusColors[project.status]}`}>
-                <Zap size={10} className="inline mr-1" />
-                {project.status}
-              </span>
-            </div>
-            <p className="text-sm text-muted-foreground">{project.problem}</p>
-          </div>
-        </div>
+        <h3 className="font-display text-xl font-bold text-foreground">{project.title}</h3>
+        <p className="text-sm text-muted-foreground mt-2">{project.problem}</p>
 
         {/* Tech stack */}
         <div className="flex flex-wrap gap-2 mt-4">
@@ -93,6 +112,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               {tech}
             </span>
           ))}
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex gap-3 mt-5">
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary flex items-center gap-2 text-sm !px-4 !py-2"
+            >
+              <Play size={14} /> Live Demo
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline flex items-center gap-2 text-sm !px-4 !py-2"
+            >
+              <Github size={14} /> View Code
+            </a>
+          )}
         </div>
       </div>
 
@@ -125,7 +168,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </AnimatePresence>
 
       {/* Footer */}
-      <div className="px-6 py-4 border-t border-border/50 flex items-center justify-between">
+      <div className="px-6 py-4 border-t border-border/50 flex items-center justify-center">
         <button
           onClick={() => setExpanded(!expanded)}
           className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1"
@@ -133,18 +176,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {expanded ? "Hide" : "View"} Case Study
           {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </button>
-        <div className="flex items-center gap-3">
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Github size={18} />
-            </a>
-          )}
-          {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-              <ExternalLink size={18} />
-            </a>
-          )}
-        </div>
       </div>
     </motion.div>
   );

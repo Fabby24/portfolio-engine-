@@ -1,21 +1,29 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Download, Mail, Github, Linkedin } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 export default function Hero() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const orb1Y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const orb2Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background with parallax */}
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img src={heroBg} alt="" className="w-full h-full object-cover opacity-30 dark:opacity-50" />
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
-      </div>
+      </motion.div>
 
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-primary/10 blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 left-1/6 w-96 h-96 rounded-full bg-accent/10 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
+      {/* Floating orbs with parallax */}
+      <motion.div style={{ y: orb1Y }} className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-primary/10 blur-3xl animate-float" />
+      <motion.div style={{ y: orb2Y }} className="absolute bottom-1/4 left-1/6 w-96 h-96 rounded-full bg-accent/10 blur-3xl animate-float" />
 
-      <div className="section-container relative z-10 pt-20">
+      <motion.div style={{ opacity: contentOpacity }} className="section-container relative z-10 pt-20">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -83,7 +91,7 @@ export default function Hero() {
             <span className="ml-4 text-sm text-primary-foreground/50 dark:text-muted-foreground">Nairobi, Kenya 🇰🇪</span>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div

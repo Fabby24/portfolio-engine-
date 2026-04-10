@@ -13,6 +13,7 @@ import Footer from "@/components/sections/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
 import ChatBot from "@/components/ChatBot";
 import ParallaxSection from "@/components/ParallaxSection";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,7 @@ const Index = () => {
           <ParallaxSection><Contact /></ParallaxSection>
           <Footer />
           <ChatBot />
+          <ScrollToTop />
         </motion.div>
       )}
     </>

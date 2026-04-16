@@ -1,32 +1,34 @@
 
+# Plan: Add SecureLab WiFi Project to Projects Section
 
-# Plan: Developer Photo in Hero + Scroll-to-Top Button
+## Changes
 
-## 1. Developer Photo in Hero Section
+**Modify: `src/components/sections/Projects.tsx`**
 
-**Modify: `src/components/sections/Hero.tsx`**
-- Change the Hero layout from single-column (`max-w-3xl`) to a two-column split layout on desktop
-- Left column: existing text content (headline, description, buttons, social links)
-- Right column: developer photo in a styled container with:
-  - Rounded border with a gradient ring (primary/accent colors)
-  - Subtle floating animation
-  - Glow/shadow effect behind the photo
-  - Responsive: photo stacks above or below text on mobile
-- Use a placeholder image path (`/developer-photo.jpg`) that the user can replace with their actual photo
+1. Update the `Project` type to add optional `teamSize` and `role` fields
+2. Generate a placeholder screenshot asset (`src/assets/project-securelab.jpg`)
+3. Add the SecureLab project to the `projects` array with all case study data:
+   - Status: "Completed"
+   - Tech stack: React, Tailwind CSS, Supabase, SMS API
+   - Team project badge showing "Team of 4"
+4. Display a "Team Project" badge on the card when `teamSize` is present (small collaborative indicator near the status badge)
+5. Show the developer's role beneath the project title when provided
 
-## 2. Scroll-to-Top Arrow Button
+## Data
 
-**Modify: `src/pages/Index.tsx`** (or create a small component)
-- Add a fixed-position "back to top" button (bottom-right, above the chatbot)
-- Shows only after user scrolls past ~300px (using `window.scrollY` listener)
-- Animated entrance/exit with Framer Motion (`AnimatePresence`)
-- Clicking scrolls smoothly to top (`window.scrollTo({ top: 0, behavior: 'smooth' })`)
-- Styled as a circular button with an `ArrowUp` icon, matching the portfolio's design system
+```
+title: "SecureLab WiFi Access Control"
+status: "Completed"
+teamSize: 4
+role: "Full-Stack Developer (API Integration, SMS Alerts, Database)"
+problem: "Unauthorized devices connecting to shared WiFi networks..."
+techStack: ["React", "Tailwind CSS", "Supabase", "SMS API"]
+github: "https://github.com/fabianmusau"
+```
 
 ## Files Changed
 
 | File | Change |
 |------|--------|
-| `src/components/sections/Hero.tsx` | Two-column layout with developer photo |
-| `src/pages/Index.tsx` | Add scroll-to-top button component |
-
+| `src/assets/project-securelab.jpg` | Generated placeholder screenshot |
+| `src/components/sections/Projects.tsx` | Add teamSize/role fields, SecureLab project entry, team badge UI |

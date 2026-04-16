@@ -94,7 +94,7 @@ export default function GitHubSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/fabianmusau/repos?sort=updated&per_page=6")
+    fetch("https://api.github.com/users/Fabby24/repos?sort=updated&per_page=6")
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) setRepos(data);
@@ -140,7 +140,7 @@ export default function GitHubSection() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Public Repos", value: repos.length || 6, icon: Code2 },
+            { label: "Public Repos", value: repos.length || 26, icon: Code2 },
             { label: "Total Stars", value: totalStars, icon: Star },
             { label: "Languages", value: topLangs.length || 4, icon: Code2 },
             { label: "Total Forks", value: repos.reduce((s, r) => s + r.forks_count, 0), icon: GitFork },
@@ -222,7 +222,7 @@ export default function GitHubSection() {
           className="text-center mt-8"
         >
           <a
-            href="https://github.com/fabianmusau"
+            href="https://github.com/Fabby24"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline inline-flex items-center gap-2 text-sm !px-5 !py-2.5"

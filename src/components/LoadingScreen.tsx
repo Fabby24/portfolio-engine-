@@ -7,7 +7,7 @@ const terminalLines = [
   { text: "✓ Fetching GitHub data", delay: 600 },
   { text: "✓ Mounting sections", delay: 900 },
   { text: "✓ Compiling assets", delay: 1200 },
-  { text: "✓ Ready — welcome to FM.", delay: 1500 },
+  { text: "✓ Ready — welcome to Dev Fabby Portfolio.", delay: 1500 },
 ];
 
 export default function LoadingScreen() {

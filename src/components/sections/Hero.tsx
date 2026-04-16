@@ -71,28 +71,15 @@ export default function Hero() {
               <a href="#projects" className="btn-primary flex items-center gap-2">
                 View Projects <ArrowDown size={18} />
               </a>
-              <a href="#contact" className="btn-outline border-primary-foreground/30 text-primary-foreground dark:border-primary dark:text-primary flex items-center gap-2">
+              <a href="#contact" className="btn-outline border-primary-foreground/10  dark:border-primary flex items-center gap-2">
                 <Mail size={18} /> Contact Me
               </a>
-              <a href="/Fabian_Musau_CV.pdf" download className="btn-outline border-primary-foreground/30 text-primary-foreground dark:border-primary dark:text-primary flex items-center gap-2">
+              <a href="/Fabian_Musau_CV.pdf" download className="btn-outline border-primary-foreground/30 text-primary-foreground dark:border-primary flex items-center gap-2">
                 <Download size={18} /> Download CV
               </a>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-10 flex items-center gap-4"
-            >
-              <a href="https://github.com/fabianmusau" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-primary-foreground/10 dark:bg-muted hover:bg-primary/20 transition-all text-primary-foreground dark:text-foreground">
-                <Github size={20} />
-              </a>
-              <a href="https://linkedin.com/in/fabianmusau" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-primary-foreground/10 dark:bg-muted hover:bg-primary/20 transition-all text-primary-foreground dark:text-foreground">
-                <Linkedin size={20} />
-              </a>
-              <span className="ml-4 text-sm text-primary-foreground/50 dark:text-muted-foreground">Nairobi, Kenya 🇰🇪</span>
-            </motion.div>
+            
           </div>
 
           {/* Right column - developer photo */}

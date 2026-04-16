@@ -37,7 +37,7 @@ export default function Navbar() {
     >
       <div className="section-container flex items-center justify-between h-16 lg:h-20">
         <a href="#" className="font-display text-xl font-bold">
-          <span className="gradient-text">FM</span>
+          <span className="gradient-text">Dev Fabby</span>
           <span className="text-foreground">.</span>
         </a>
 

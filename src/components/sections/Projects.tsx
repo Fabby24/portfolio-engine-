@@ -4,6 +4,7 @@ import { ExternalLink, Github, ChevronDown, ChevronUp, Zap, Play } from "lucide-
 import projectEdubursary from "@/assets/project-edubursary.jpg";
 import projectBilling from "@/assets/project-billing.jpg";
 import projectSms from "@/assets/project-sms.jpg";
+import projectSecurelab from "@/assets/project-securelab.jpg";
 
 type Project = {
   title: string;
@@ -18,6 +19,8 @@ type Project = {
   impact: string;
   github?: string;
   live?: string;
+  teamSize?: number;
+  role?: string;
 };
 
 const projects: Project[] = [

@@ -4,6 +4,7 @@ import { ExternalLink, Github, ChevronDown, ChevronUp, Zap, Play } from "lucide-
 import projectEdubursary from "@/assets/project-edubursary.jpg";
 import projectBilling from "@/assets/project-billing.jpg";
 import projectSms from "@/assets/project-sms.jpg";
+import projectSecurelab from "@/assets/project-securelab.jpg";
 
 type Project = {
   title: string;
@@ -18,6 +19,8 @@ type Project = {
   impact: string;
   github?: string;
   live?: string;
+  teamSize?: number;
+  role?: string;
 };
 
 const projects: Project[] = [
@@ -62,6 +65,21 @@ const projects: Project[] = [
     github: "https://github.com/fabianmusau",
     live: "https://bulksms.example.com",
   },
+  {
+    title: "SecureLab WiFi Access Control",
+    status: "Completed",
+    screenshot: projectSecurelab,
+    teamSize: 4,
+    role: "Full-Stack Developer (API Integration, SMS Alerts, Database)",
+    problem: "Unauthorized devices connecting to shared WiFi networks created security vulnerabilities, bandwidth misuse, and lack of visibility for administrators.",
+    goal: "Build a system that detects new devices, identifies unauthorized connections, sends instant SMS alerts, and provides a monitoring dashboard.",
+    approach: "Designed a real-time monitoring system integrating network detection logic with a web dashboard and SMS notification system.",
+    techStack: ["React", "Tailwind CSS", "Supabase", "SMS API"],
+    challenges: "Handling real-time device detection reliably, avoiding duplicate alerts, integrating SMS efficiently, and synchronizing frontend with backend events.",
+    solution: "Implemented structured device tracking with Supabase, event-based triggers for new connections, optimized alert logic, and a clean monitoring dashboard.",
+    impact: "Enabled real-time network visibility, improved security awareness, and reduced response time to unauthorized access.",
+    github: "https://github.com/fabianmusau",
+  },
 ];
 
 const statusColors: Record<string, string> = {
@@ -94,15 +112,25 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
-        <span className={`absolute top-3 right-3 text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm ${statusColors[project.status]}`}>
-          <Zap size={10} className="inline mr-1" />
-          {project.status}
-        </span>
+        <div className="absolute top-3 right-3 flex gap-2">
+          {project.teamSize && (
+            <span className="text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm bg-purple-500/10 text-purple-600 dark:text-purple-400">
+              👥 Team of {project.teamSize}
+            </span>
+          )}
+          <span className={`text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm ${statusColors[project.status]}`}>
+            <Zap size={10} className="inline mr-1" />
+            {project.status}
+          </span>
+        </div>
       </div>
 
       {/* Header */}
       <div className="p-6 pb-4">
         <h3 className="font-display text-xl font-bold text-foreground">{project.title}</h3>
+        {project.role && (
+          <p className="text-xs font-medium text-accent mt-1">{project.role}</p>
+        )}
         <p className="text-sm text-muted-foreground mt-2">{project.problem}</p>
 
         {/* Tech stack */}

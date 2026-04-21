@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-
 type Msg = { role: "user" | "assistant"; content: string };
 
 const quickQuestions = [
@@ -12,6 +11,8 @@ const quickQuestions = [
   "Tell me about EduBursary",
 ];
 
+const GEMINI_API_KEY = "AIzaSyDE_dUsW4eMFgf5HPOEdeYSR5zNwoe_faw";
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -31,64 +32,34 @@ export default function ChatBot() {
     setInput("");
     setLoading(true);
 
-    let assistantSoFar = "";
-
     try {
-      const resp = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      // Convert message history to Gemini's format
+      const geminiContents = allMessages.map((msg) => ({
+        role: msg.role === "assistant" ? "model" : "user",
+        parts: [{ text: msg.content }],
+      }));
+
+      const resp = await fetch(GEMINI_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          system_instruction: {
+            parts: [{ text: "You are an AI assistant for Fabian's personal portfolio website. Answer questions about Fabian's experience, skills, and projects helpfully and concisely." }]
           },
-          body: JSON.stringify({ messages: allMessages }),
-        }
-      );
+          contents: geminiContents,
+        }),
+      });
 
       if (!resp.ok) {
         const errData = await resp.json().catch(() => ({}));
-        throw new Error(errData.error || `Error ${resp.status}`);
+        throw new Error(errData.error?.message || `Error ${resp.status}`);
       }
 
-      if (!resp.body) throw new Error("No response body");
+      const data = await resp.json();
+      const assistantText =
+        data.candidates?.[0]?.content?.parts?.[0]?.text ?? "Sorry, I couldn't generate a response.";
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-
-      const upsert = (chunk: string) => {
-        assistantSoFar += chunk;
-        setMessages((prev) => {
-          const last = prev[prev.length - 1];
-          if (last?.role === "assistant") {
-            return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantSoFar } : m));
-          }
-          return [...prev, { role: "assistant", content: assistantSoFar }];
-        });
-      };
-
-      let done = false;
-      while (!done) {
-        const { done: rd, value } = await reader.read();
-        if (rd) break;
-        buffer += decoder.decode(value, { stream: true });
-
-        let nl: number;
-        while ((nl = buffer.indexOf("\n")) !== -1) {
-          let line = buffer.slice(0, nl);
-          buffer = buffer.slice(nl + 1);
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (!line.startsWith("data: ")) continue;
-          const json = line.slice(6).trim();
-          if (json === "[DONE]") { done = true; break; }
-          try {
-            const parsed = JSON.parse(json);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) upsert(content);
-          } catch { /* partial */ }
-        }
-      }
+      setMessages((prev) => [...prev, { role: "assistant", content: assistantText }]);
     } catch (e: any) {
       setMessages((prev) => [
         ...prev,
@@ -98,6 +69,8 @@ export default function ChatBot() {
 
     setLoading(false);
   };
+
+  // ... rest of your JSX remains exactly the same
 
   return (
     <>

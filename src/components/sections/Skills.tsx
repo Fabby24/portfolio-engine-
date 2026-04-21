@@ -40,12 +40,6 @@ const skills: Skill[] = [
     strengths: ["Responsive Design", "Design Systems", "Dark Mode"],
   },
   {
-    name: "Next.js", icon: MonitorSmartphone, category: "Frontend", proficiency: "Proficient",
-    description: "Leveraged SSR and API routes for SEO-optimized, full-stack web applications.",
-    usedIn: ["EduBursary System"],
-    strengths: ["SSR/SSG", "API Routes", "SEO Optimization"],
-  },
-  {
     name: "Node.js", icon: Server, category: "Backend", proficiency: "Advanced",
     description: "Built scalable REST APIs and real-time backend services powering multiple production applications.",
     usedIn: ["EduBursary System", "Bulk SMS Platform", "Billing & Reservation"],
@@ -63,12 +57,7 @@ const skills: Skill[] = [
     usedIn: ["Bulk SMS Platform", "Billing & Reservation"],
     strengths: ["Routing", "Middleware", "Error Handling"],
   },
-  {
-    name: "PostgreSQL", icon: Database, category: "Backend", proficiency: "Proficient",
-    description: "Designed relational schemas, wrote complex queries, and managed data integrity across applications.",
-    usedIn: ["EduBursary System", "SecureLab WiFi"],
-    strengths: ["Schema Design", "Complex Queries", "Data Integrity"],
-  },
+  
   {
     name: "MongoDB", icon: Database, category: "Backend", proficiency: "Familiar",
     description: "Used for flexible document storage in projects requiring dynamic data models.",
@@ -82,12 +71,6 @@ const skills: Skill[] = [
     strengths: ["Branching Strategies", "Code Reviews", "CI/CD"],
   },
   {
-    name: "Docker", icon: Container, category: "Tools", proficiency: "Familiar",
-    description: "Containerized applications for consistent development and deployment environments.",
-    usedIn: ["Bulk SMS Platform"],
-    strengths: ["Containerization", "Dev Environments"],
-  },
-  {
     name: "REST APIs", icon: Globe, category: "Tools", proficiency: "Advanced",
     description: "Designed and consumed RESTful APIs with proper authentication, rate limiting, and documentation.",
     usedIn: ["EduBursary System", "Bulk SMS Platform", "Billing & Reservation", "SecureLab WiFi"],
@@ -99,12 +82,7 @@ const skills: Skill[] = [
     usedIn: ["Bulk SMS Platform", "SecureLab WiFi"],
     strengths: ["Shell Scripting", "Server Admin", "Deployment"],
   },
-  {
-    name: "Firebase", icon: Flame, category: "Tools", proficiency: "Familiar",
-    description: "Used for authentication, real-time database, and hosting in rapid prototyping scenarios.",
-    usedIn: ["Billing & Reservation"],
-    strengths: ["Auth", "Realtime DB", "Hosting"],
-  },
+  
 ];
 
 const categories = ["All", "Frontend", "Backend", "Tools"] as const;
@@ -195,9 +173,9 @@ function SkillCard({ skill, index, inView }: { skill: Skill; index: number; inVi
 /* ─── Tech Stack Flow ─── */
 const flowNodes = [
   { name: "React", icon: Code2, role: "Frontend UI", projects: "All 4 Projects" },
-  { name: "Node/Express", icon: Server, role: "API Layer", projects: "Bulk SMS, Billing" },
-  { name: "Supabase", icon: Database, role: "Database & Auth", projects: "EduBursary, SecureLab" },
-  { name: "SMS API", icon: Wifi, role: "Notifications", projects: "Bulk SMS, SecureLab" },
+  { name: "Node/Express", icon: Server, role: "API Layer", projects: "Dynamic Billing" },
+  { name: "Supabase", icon: Database, role: "Database & Auth", projects: "Billing system, SecureLab" },
+  { name: "SMS API", icon: Wifi, role: "Notifications", projects: "Dj Booking platform, SecureLab" },
 ];
 
 function TechStackFlow({ inView }: { inView: boolean }) {

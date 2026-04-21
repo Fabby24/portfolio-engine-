@@ -56,7 +56,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Email</p>
-                    <p className="font-medium text-foreground text-sm">fabianmusau@email.com</p>
+                    <p className="font-medium text-foreground text-sm">musaufabian7@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -72,10 +72,10 @@ export default function Contact() {
             </div>
 
             <div className="flex items-center gap-3">
-              <a href="https://github.com/fabianmusau" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl card-elevated hover:border-primary/30 transition-all text-muted-foreground hover:text-primary">
+              <a href="https://github.com/Fabby24" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl card-elevated hover:border-primary/30 transition-all text-muted-foreground hover:text-primary">
                 <Github size={20} />
               </a>
-              <a href="https://linkedin.com/in/fabianmusau" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl card-elevated hover:border-primary/30 transition-all text-muted-foreground hover:text-primary">
+              <a href="https://www.linkedin.com/in/fabian-musau/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl card-elevated hover:border-primary/30 transition-all text-muted-foreground hover:text-primary">
                 <Linkedin size={20} />
               </a>
             </div>

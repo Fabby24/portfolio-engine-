@@ -11,13 +11,13 @@ export default function Footer() {
           <span className="font-semibold text-foreground">Fabian Musau</span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="https://github.com/fabianmusau" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+          <a href="https://github.com/Fabby24" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
             <Github size={18} />
           </a>
-          <a href="https://linkedin.com/in/fabianmusau" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+          <a href="https://www.linkedin.com/in/fabian-musau/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
             <Linkedin size={18} />
           </a>
-          <a href="mailto:fabianmusau@email.com" className="text-muted-foreground hover:text-primary transition-colors">
+          <a href="mailto:musaufabian7@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
             <Mail size={18} />
           </a>
         </div>
